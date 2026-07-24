@@ -1,0 +1,540 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES — DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Brand Colors — matching real logo */
+  --navy: #1a2b5c;
+  --navy-light: #0d1f3c;
+  --navy-dark: #0a1628;
+  --gold: #c9a227;
+  --gold-light: #d4af37;
+  --gold-bright: #f0c040;
+  --gold-dark: #a88520;
+  --white: #ffffff;
+  --off-white: #f8f7f4;
+  --light-gray: #f1f5f9;
+  --mid-gray: #94a3b8;
+  --dark-gray: #334155;
+
+  /* Shadcn compatibility */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 222 47% 11%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 44 71% 47%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 44 71% 47%;
+  --radius: 0.75rem;
+
+  /* Fonts */
+  --font-manrope: 'Manrope', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* ============================================================
+   BASE RESET & GLOBAL STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--navy);
+  font-family: var(--font-inter);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   CUSTOM SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--navy-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-light);
+}
+
+/* ============================================================
+   SELECTION STYLES
+   ============================================================ */
+::selection {
+  background-color: var(--gold);
+  color: var(--navy);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-manrope);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c9a227 0%, #f0c040 50%, #c9a227 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-navy {
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-dark {
+    background: rgba(10, 22, 40, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(201, 162, 39, 0.15);
+  }
+
+  .glass-gold {
+    background: rgba(201, 162, 39, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #c9a227, transparent, #c9a227);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @screen md {
+    .section-padding {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
+
+  @screen lg {
+    .section-padding {
+      padding-top: 9rem;
+      padding-bottom: 9rem;
+    }
+  }
+
+  .container-premium {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @screen md {
+    .container-premium {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  @screen xl {
+    .container-premium {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+}
+
+/* ============================================================
+   ANIMATED GRADIENT BUTTON
+   ============================================================ */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #c9a227, #f0c040, #c9a227);
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+  color: var(--navy);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.5);
+}
+
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.2s ease;
+}
+
+.btn-gold:hover::after {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-navy {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-navy:hover {
+  background: var(--navy-light);
+  border-color: var(--gold);
+  box-shadow: 0 8px 30px rgba(10, 22, 40, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold);
+  font-weight: 600;
+  border: 1.5px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   ============================================================ */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c9a227, #f0c040, #c9a227);
+  z-index: 9999;
+  transform-origin: left;
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.8);
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.15s ease;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-follower {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 162, 39, 0.6);
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================
+   HERO BACKGROUND ENGINEERING PATTERN
+   ============================================================ */
+.engineering-grid {
+  background-image:
+    linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.blueprint-lines {
+  background-image:
+    linear-gradient(rgba(201, 162, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(201, 162, 39, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+
+/* ============================================================
+   CARD HOVER EFFECTS
+   ============================================================ */
+.card-premium {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-premium:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 20px rgba(201, 162, 39, 0.15);
+}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* ============================================================
+   ANIMATED COUNTER
+   ============================================================ */
+.counter-number {
+  font-family: var(--font-manrope);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   IMAGE HOVER ZOOM
+   ============================================================ */
+.img-zoom-container {
+  overflow: hidden;
+}
+
+.img-zoom-container img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   SECTION TITLE UNDERLINE
+   ============================================================ */
+.section-title-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.section-title-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #c9a227, #f0c040);
+  border-radius: 2px;
+}
+
+/* ============================================================
+   BACK TO TOP BUTTON
+   ============================================================ */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c9a227, #f0c040);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(201, 162, 39, 0.6);
+}
+
+/* ============================================================
+   INPUT FOCUS STYLES
+   ============================================================ */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15) !important;
+}
+
+/* ============================================================
+   LINK STYLES
+   ============================================================ */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================================
+   SMOOTH PAGE TRANSITIONS
+   ============================================================ */
+.page-transition {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* ============================================================
+   RESPONSIVE VIDEO/IFRAME
+   ============================================================ */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+/* ============================================================
+   GRADIENT TEXT SHIMMER
+   ============================================================ */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #c9a227 0%,
+    #f0c040 25%,
+    #c9a227 50%,
+    #f0c040 75%,
+    #c9a227 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(1deg); }
+  66% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 162, 39, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(201, 162, 39, 0.7); }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes rotateGear {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   SVG ANIMATION HELPERS
+   ============================================================ */
+.animate-draw-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 3s ease forwards;
+}
+
+.animate-gear {
+  transform-origin: center;
+  animation: rotateGear 10s linear infinite;
+}
+
+.animate-gear-reverse {
+  transform-origin: center;
+  animation: rotateGear 8s linear infinite reverse;
+}

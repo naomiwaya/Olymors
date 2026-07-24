@@ -1,0 +1,8 @@
+OLYMORS website — generated project
+node_modules/
+.next/
+.env.local
+.env
+out/
+build/
+*.log
